@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qmo Contract Mange Center</title>
+</head>
+<body>
+    <div>
+        <button id="connect">conectar con metamask</button>
+        <div id="content" >
+            <h1>Qmo Contract Interact</h1>
+            <h2>Your Address</h2>
+            <span id="account"></span>
+            <form id="sendTokens">
+                <label>Adress</label>
+                <h1>Send Tokens :</h1>
+                <label>Destinatario</label>
+                <input type="text" placeholder="recipient" id="recipient">
+                <label>Cantidad</label>
+                <input type="number" placeholder="amount" id="amount">
+                <button id="send">Send</button>
+            </form>
+            <form id="IncreaseTotalSupply">
+                <h1>IncreaseTotalSupply :</h1>
+                <h3>Current Supply</h3>
+                <h4 id="currentSuply">Current</h4>
+                <input type="number" placeholder="Amount to add" id="amountToAdd">
+                <button id="AddSupply">Add</button>
+                
+            </form>
+        </div>
+    </div>
+</body>
+</html>
