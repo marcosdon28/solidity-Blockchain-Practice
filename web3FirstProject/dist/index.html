@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primera app Web3</title>
+</head>
+<body>
+    <button id="connect">conectar con metamask</button>
+    <div id="content" style="display: none;">
+        <h1>Qmo Contract Interact</h1>
+        <h2>Your Address</h2>
+        <span id="account"></span>
+        <form id="send">
+            <label>Adress</label>
+            <input type="text" placeholder="recipient" id="recipient">
+            <label>Cantidad</label>
+            <input type="number" placeholder="amount" id="amount">
+            <button id="send">Send</button>
+        </form>
+        
+        <form id="IncreaseTotalSupply">
+            <h1>IncreaseTotalSupply :</h1>
+            <h3>Current Supply</h3>
+            <h3 id="currentSuply">Current</h3>
+            <input type="number" placeholder="Amount to add" id="amountToAddSupply">
+            <button id="AddSupply">Add</button>
+            
+        </form>
+
+    </div>
+    
+    <script src="/main.js"></script>
+</body>
+</html>
