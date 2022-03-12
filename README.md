@@ -1,4 +1,4 @@
 # solidityPractice
 Solidity practice projects
 
-Space to save all solidity projects and practices
+Space to save practices about solidity or blockchain
