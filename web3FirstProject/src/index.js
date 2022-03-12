@@ -1,256 +1,10 @@
 const Web3 = require('web3');
-
+import abi from "../abi";
 
 var Contract = require('web3-eth-contract');
 Contract.setProvider(window.web3.currentProvider); //Web3.givenProvider
-let contract = new Contract([
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "initialSupply",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "spender",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "tokens",
-				"type": "uint256"
-			}
-		],
-		"name": "Approval",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "tokens",
-				"type": "uint256"
-			}
-		],
-		"name": "Transfer",
-		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "delegate",
-				"type": "address"
-			}
-		],
-		"name": "allowance",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "delegate",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "numTokens",
-				"type": "uint256"
-			}
-		],
-		"name": "approve",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "tokenOwner",
-				"type": "address"
-			}
-		],
-		"name": "balanceOf",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "decimals",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "newTokensAmount",
-				"type": "uint256"
-			}
-		],
-		"name": "increaseTotalSupply",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "name",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "symbol",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "totalsupply",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "recipient",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "numTokens",
-				"type": "uint256"
-			}
-		],
-		"name": "transfer",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "buyer",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "numTokens",
-				"type": "uint256"
-			}
-		],
-		"name": "transferFrom",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	}
-], "0x5E2a8B058281e685A7D0D52FF59Ed941cE722ad9");
+var contractAddress = "0x5E2a8B058281e685A7D0D52FF59Ed941cE722ad9";
+let contract = new Contract(abi, contractAddress);
 
 window.onload = function() {
     //variables
@@ -268,9 +22,13 @@ window.onload = function() {
     const recipientInput = document.getElementById('recipient');
     const amountInput = document.getElementById('amount');
 
+	const currentSuply = document.getElementById('currentSuply');
 	const formTotalSuplyIncrease = document.getElementById('IncreaseTotalSupply');
 	const amountToAddSupply = document.getElementById('amountToAddSupply');
     
+	const formBalanceOf = document.getElementById('balanceOf');
+	const addressToBalanceOf = document.getElementById('addressToBalanceOf');
+	const result = document.getElementById('resultBalance');
     //functions
     const connect = async function(){
         if (window.ethereum){
@@ -281,7 +39,7 @@ window.onload = function() {
             from = accounts[0];
             content.style.display = 'initial';
             account.innerText = from;
-
+			refreshSuply();
             
         }catch(err){
         alert('Connection reject by user');
@@ -291,6 +49,18 @@ window.onload = function() {
             alert('Web3 provider is neccesary eg: Metamask');     
         }
     }
+	//funcion para refrescar supply
+	const refreshSuply = function(){
+		contract.methods.totalsupply().call((err, result) => {
+			if(err){
+			  console.error('Error: ', err);
+			}
+		  
+			let supply = result / 1000000000;
+			currentSuply.innerText = supply + " QMO";
+		  });
+		
+	}
 
     const transact = function(event){
         //prevenimos la recarga de la pagina al confirmar el form
@@ -314,22 +84,58 @@ window.onload = function() {
 
     }
 
-	const increaseSupply = function(event){
+	const increaseSupply = async function(event){
 		event.preventDefault();
 		const amount = amountToAddSupply.value;
 
-		if(Number(amount) <= 0 ){
+		if(Number(amount) <= 0){
             alert('Cannot Add a negative amount to supply');
             return;
         }
+		else{
+			contract.methods.increaseTotalSupply(amount).send({
+			from,}).on('confirmation', refreshSuply);
+			
+		}
 		
 
+	}
+
+	const viewBalanceOf = function(event){
+		event.preventDefault();
+		const address = addressToBalanceOf.value;
+		if(address == ""){
+			alert("the field cannot be empty");
+			return;
+
+		}
+		else{
+			contract.methods.balanceOf(address).call((err, result) => {
+				if(err){
+				  console.error('Error: ', err);
+				  alert("invalid Address");
+				}
+			  
+				if(result == 0){
+					resultBalance.innerText = "This Address Do not have any Qmo tokens!";
+
+				}
+				else{
+					resultBalance.innerText = result / 1000000000;
+				}
+				
+			  });
+
+		}
+		
+		
 	}
 
     //events
     connectButton.onclick = connect ;
     formsend.onsubmit = transact;
 	IncreaseTotalSupply.onsubmit = increaseSupply;
+	formBalanceOf.onsubmit = viewBalanceOf;
 };
 
 
